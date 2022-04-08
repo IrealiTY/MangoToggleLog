@@ -1,11 +1,67 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="/steam_resource/css/2.css">
-        <link rel="stylesheet" href="/steam_resource/css/39.css">
-        <link rel="stylesheet" href="/steam_resource/css/library.css">
-        <script src="/static/library.js"></script>
-    </head>
-    <body>
-        <h2>Hello World</h2>
-    </body>
-</html>
+            <head>
+                <link rel="stylesheet" href="/steam_resource/css/2.css">
+                <link rel="stylesheet" href="/steam_resource/css/39.css">
+                <link rel="stylesheet" href="/steam_resource/css/library.css">
+                <script>
+                    function setToggleState(id, state) {
+                        const ENABLED_CLASS = "basicdialog_On_1RyF_";
+                        let toggle = document.getElementById(id);
+                        if (state && !toggle.classList.contains(ENABLED_CLASS)) {
+                            toggle.classList.add(ENABLED_CLASS);
+                        }
+                        if (!state && toggle.classList.contains(ENABLED_CLASS)) {
+                            toggle.classList.remove(ENABLED_CLASS);
+                        }
+                    }
+                    function handlemangologToggle() {
+                        let toggle = document.getElementById("mangologToggle");
+                        let isActive = toggle.classList.contains("basicdialog_On_1RyF_");
+                        if (isActive) {
+                            call_plugin_method("set_ssh_state", { "state": false }).then((value) => {
+                                setToggleState("mangologToggle", value);
+                            })
+                        }
+                        else {
+                            call_plugin_method("set_ssh_state", { "state": true }).then((value) => {
+                                setToggleState("mangologToggle", value);
+                            })
+                        }
+                    }
+                    async function handleInitialValue() {
+                        console.log("InitialValue")
+                        let state = await call_plugin_method("get_mago_state", {});
+                        console.log(state)
+                        setToggleState("mangologToggle", state)
+                    }
+                </script>
+            </head>
+            <body onload="handleInitialValue()">
+                
+                <div class="quickaccessmenu_TabGroupPanel_1QO7b Panel Focusable">
+                    <div class="quickaccesscontrols_PanelSectionRow_26R5w">
+                        <div class="quickaccesscontrols_PanelSectionRow_26R5w">
+                            <div class="basicdialog_Field_ugL9c basicdialog_WithFirstRow_31BpU basicdialog_WithBottomSeparator_1e8sp basicdialog_ExtraPaddingOnChildrenBelow_2-owv basicdialog_StandardPadding_1HrfN basicdialog_HighlightOnFocus_1xh2W Panel Focusable" style="--indent-level:0;">
+                                <div class="basicdialog_FieldLabelRow_1oXm0">
+                                    <div class="basicdialog_FieldLabel_2URP7">
+                                        <div class="basicdialog_FieldLeadIcon_1WR7O">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-server" viewBox="0 0 16 16">
+                                            <path class="st0" d="M22.5,20.8c-1.8,4.2-9.6,9.7-14,7.9c-5-2.1-0.8-5.1-1.6-10.1c-1.3-8.2,6.6-10.5,10.9-8.7S24.2,16.5,22.5,20.8z"/>
+                                            <line class="st0" x1="20.7" y1="3.2" x2="17.9" y2="9.9"/>
+                                            <path class="st0" d="M26,7.8c-2.4-1.9-6.7-0.7-6.7-0.7l0,0c3.7,1.9,6.9,4.7,9.2,8.1L29,16C29,16,30,11,26,7.8z"/>
+                                            </svg>
+                                        </div>
+                                        MangoHud Logger
+                                    </div>
+                                    <div class="basicdialog_FieldChildren_279n8">
+                                        <div id="mangologToggle" tabindex="0" class="basicdialog_Toggle_1DKu7 Focusable" onclick="handlemangologToggle()">
+                                            <div class="basicdialog_ToggleRail_3ZEjC"></div>
+                                        <div class="basicdialog_ToggleSwitch_wXGdI"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
