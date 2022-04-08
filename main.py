@@ -23,5 +23,19 @@ class Plugin:
         pass
 
     # Asyncio-compatible long-running code, executed in a task when the plugin is loaded
-    async def __main(self):
-        pass
+    async def __main
+
+
+    async def get_mangolog_state(self):
+        # return subprocess.Popen("systemctl is-active sshd", stdout=subprocess.PIPE, shell=True).communicate()[0] == b'active\n'
+        # still looking for a method to check if mangohud logger is running is running
+
+    async def set_mangolog_state(self, **kwargs):
+        print(kwargs["state"])
+
+        if kwargs["state"]:
+            print(subprocess.Popen("mangohudctl set log_session true", stdout=subprocess.PIPE, shell=True).communicate())
+        else:
+            print(subprocess.Popen("mangohudctl set log_session false", stdout=subprocess.PIPE, shell=True).communicate())
+        
+        return await self.get_ssh_state(self)
