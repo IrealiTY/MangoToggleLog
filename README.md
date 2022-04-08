@@ -1,13 +1,6 @@
-# Plugin-Template
+# Toggle for the MangoHud Commandline logger
 
-This is the template plugin for developing plugins for the [SteamOS Plugin Loader](https://github.com/SteamDeckHomebrew/PluginLoader).
-
-## Usage
-
-1. Click on the green `Use this template` button to create a new repository for your plugin
-2. Rename the `plugin_template.py` file to something unique
-3. Add your code to the plugin's python and html files.
-4. To use it, simply `git clone` the repo into the `/home/deck/homebrew/plugins` folder on your Steam Deck
+This is based on the the template plugin for developing plugins for the [ExtraSettings Plugin](https://github.com/SteamDeckHomebrew/ExtraSettingsPlugin).
 
 ## License
 
